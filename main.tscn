@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://br18uvvn0c7h0"]
+
+[ext_resource type="PackedScene" uid="uid://ckelu6snj4knf" path="res://enemy.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dqjfbc4duoli" path="res://player.tscn" id="2_h2yge"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
+normal = Vector2(-0.016126934, 0.99986994)
+distance = 30.449327
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
+normal = Vector2(0.99984616, 0.01754116)
+distance = -95.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1bvp3"]
+normal = Vector2(-0.9998348, -0.018178813)
+distance = 21.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lquwl"]
+normal = Vector2(-0.010203551, -0.9999479)
+distance = 65.01703
+
+[node name="Main" type="Node2D" unique_id=1658041836]
+
+[node name="Enemy" parent="." unique_id=1571408113 instance=ExtResource("1_0xm2m")]
+position = Vector2(487, 345)
+
+[node name="Player" parent="." unique_id=109719056 instance=ExtResource("2_h2yge")]
+position = Vector2(887, 238)
+
+[node name="The Ring" type="Node" parent="." unique_id=1760894182]
+
+[node name="Upper" type="StaticBody2D" parent="The Ring" unique_id=556777635]
+position = Vector2(472, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="The Ring/Upper" unique_id=395134038]
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="Left" type="StaticBody2D" parent="The Ring" unique_id=2140975664]
+position = Vector2(90, 271)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="The Ring/Left" unique_id=741920082]
+shape = SubResource("WorldBoundaryShape2D_h2yge")
+
+[node name="Right" type="StaticBody2D" parent="The Ring" unique_id=129993245]
+position = Vector2(1175, 297)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="The Ring/Right" unique_id=1415044608]
+shape = SubResource("WorldBoundaryShape2D_1bvp3")
+
+[node name="Down" type="StaticBody2D" parent="The Ring" unique_id=830994109]
+position = Vector2(568, 711)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="The Ring/Down" unique_id=2005273656]
+shape = SubResource("WorldBoundaryShape2D_lquwl")
