@@ -15,12 +15,10 @@ func _physics_process(_delta: float) -> void:
 
 func take_damage(amount: float) -> void:
 	current_health -= amount
-	print("💥 Player hit! Health remaining: ", current_health)
+	print("💥 Player hit! Health remaining: ", int(current_health))
 	
 	if current_health <= 0:
 		die()
 
 func die() -> void:
-	print("💀 GAME OVER: You died in The Ring!")
-	# Temporarily freeze the player or restart the scene
-	set_physics_process(false)
+	get_tree().reload_current_scene()
