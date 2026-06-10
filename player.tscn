@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dqjfbc4duoli"]
 
 [ext_resource type="Script" uid="uid://gunjr3ecckai" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://c73oaynxgwu4t" path="res://Assets/player.png" id="2_onrkg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 58.549126
@@ -9,9 +8,85 @@ radius = 58.549126
 [node name="Player" type="CharacterBody2D" unique_id=109719056]
 script = ExtResource("1_onrkg")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1980677404]
-position = Vector2(-2, 0)
-texture = ExtResource("2_onrkg")
+[node name="head" type="Polygon2D" parent="." unique_id=1264296308]
+position = Vector2(3, 12)
+color = Color(0.9647059, 0.9411765, 0.1254902, 1)
+polygon = PackedVector2Array(-51, -31, -34, -60, -5, -71, 25, -61, 44, -30)
+
+[node name="body" type="Polygon2D" parent="." unique_id=1462571205]
+color = Color(0.9641941, 0.9417644, 0.12361532, 1)
+polygon = PackedVector2Array(-46, -20, -2, -59, 46, -19, 43, 44, 2, 57, -46, 41)
+uv = PackedVector2Array(-58, -6, -2, -59, 59, -3, 37, 44, -7, 44, -46, 41)
+
+[node name="Stripe1" type="ColorRect" parent="." unique_id=58691217]
+offset_left = -2.0
+offset_top = -19.0
+offset_right = 46.0
+offset_bottom = 26.0
+color = Color(0.30417585, 0.14013433, 0, 1)
+
+[node name="Stripe2" type="ColorRect" parent="." unique_id=1094940758]
+texture_filter = 1
+offset_left = -48.0
+offset_top = -19.0
+offset_right = -3.0
+offset_bottom = 26.0
+color = Color(0.30588236, 0.14117648, 0, 1)
+
+[node name="WingLeft" type="ColorRect" parent="." unique_id=1908332407]
+offset_left = -77.0
+offset_top = -10.0
+offset_right = -37.0
+offset_bottom = 30.0
+pivot_offset_ratio = Vector2(40, 0)
+color = Color(0.61960787, 0.61960787, 0.61960787, 0.3254902)
+
+[node name="WingRigh" type="ColorRect" parent="." unique_id=1029019042]
+offset_left = 35.0
+offset_top = -9.0
+offset_right = 75.0
+offset_bottom = 31.0
+color = Color(0.61960787, 0.61960787, 0.61960787, 0.3254902)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=5090434]
+position = Vector2(-11, -4)
 shape = SubResource("CircleShape2D_hqtel")
+
+[node name="eye right" type="ColorRect" parent="." unique_id=1050227634]
+offset_left = 14.0
+offset_top = -47.0
+offset_right = 23.0
+offset_bottom = -36.0
+color = Color(0, 0, 0, 1)
+
+[node name="light right eye" type="ColorRect" parent="." unique_id=2060819851]
+offset_left = 18.0
+offset_top = -47.0
+offset_right = 23.0
+offset_bottom = -41.0
+
+[node name="eye left" type="ColorRect" parent="." unique_id=958169250]
+offset_left = -29.0
+offset_top = -35.0
+offset_right = -20.0
+offset_bottom = -24.0
+color = Color(0, 0, 0, 1)
+
+[node name="mustache 1" type="Polygon2D" parent="eye left" unique_id=910538563]
+position = Vector2(9, 17)
+skew = -0.09250245
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-17, -82, -3.262619, -53.264877, 1, -36, 2, -31, 2, -29)
+
+[node name="mustache" type="Polygon2D" parent="eye left" unique_id=1159064752]
+position = Vector2(37.000004, 14.999998)
+scale = Vector2(0.7368421, 1.1132076)
+skew = 0.37350047
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-17, -82, -3.262619, -53.264877, 1, -36, 2, -31, 2, -29)
+
+[node name="light left eye" type="ColorRect" parent="." unique_id=1352938572]
+offset_left = -24.0
+offset_top = -34.0
+offset_right = -19.0
+offset_bottom = -28.0

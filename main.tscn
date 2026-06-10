@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ckelu6snj4knf" path="res://enemy.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dqjfbc4duoli" path="res://player.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://crm2fs8siwfof" path="res://game_over_screen.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://bp31gun0xrali" path="res://Assets/back.png" id="4_1bvp3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 normal = Vector2(-0.016126934, 0.99986994)
@@ -20,7 +21,67 @@ distance = 21.0
 normal = Vector2(-0.010203551, -0.9999479)
 distance = 65.01703
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.26, 0.18668, 0.1378, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.7490196, 0.25882354, 0.22352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.1922, 0.57722, 0.62, 1)
+
+[sub_resource type="FontFile" id="FontFile_h2yge"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/33/0/ascent = 0.0
+cache/0/33/0/descent = 0.0
+cache/0/33/0/underline_position = 0.0
+cache/0/33/0/underline_thickness = 0.0
+cache/0/33/0/scale = 1.0
+cache/0/22/0/ascent = 0.0
+cache/0/22/0/descent = 0.0
+cache/0/22/0/underline_position = 0.0
+cache/0/22/0/underline_thickness = 0.0
+cache/0/22/0/scale = 1.0
+
 [node name="Main" type="Node2D" unique_id=1658041836]
+
+[node name="PaperBackground" type="TextureRect" parent="." unique_id=186100391]
+modulate = Color(0.7342697, 0.5327097, 0.43607578, 1)
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -7.0
+offset_right = 1178.0
+offset_bottom = 660.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_1bvp3")
+expand_mode = 1
 
 [node name="Enemy" parent="." unique_id=1571408113 instance=ExtResource("1_0xm2m")]
 position = Vector2(487, 345)
@@ -57,7 +118,7 @@ shape = SubResource("WorldBoundaryShape2D_lquwl")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1231385645]
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer" unique_id=2053037891]
-process_mode = 2
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -93,8 +154,41 @@ alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/GameOverScreen/VBoxContainer" unique_id=5762809]
 layout_mode = 2
-text = "Loser"
+text = "Rejected"
 
 [node name="Button" type="Button" parent="CanvasLayer/GameOverScreen/VBoxContainer" unique_id=1914047187]
 layout_mode = 2
 text = "Just Press me to start again."
+
+[node name="CatchUpBar" type="ProgressBar" parent="CanvasLayer" unique_id=12350256]
+anchors_preset = -1
+anchor_left = -0.045
+anchor_top = -0.025
+offset_left = 54.840004
+offset_top = 15.200001
+offset_right = 260.0
+offset_bottom = 41.0
+theme_override_styles/background = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=1646644905]
+anchors_preset = -1
+anchor_right = 0.09
+anchor_bottom = 0.041
+offset_right = 157.31999
+offset_bottom = 16.432
+theme_override_styles/fill = SubResource("StyleBoxFlat_lquwl")
+show_percentage = false
+
+[node name="HealthText" type="Label" parent="CanvasLayer/HealthBar" unique_id=1187834465]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = 44.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(1, 0.6306784, 0.39276153, 1)
+theme_override_fonts/font = SubResource("FontFile_h2yge")
+theme_override_font_sizes/font_size = 22
+text = "100 / 100"
+horizontal_alignment = 1
