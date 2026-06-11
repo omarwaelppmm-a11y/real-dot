@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c4heuxkw1efi"]
+
+[ext_resource type="Script" uid="uid://btgu1is27hrqb" path="res://projectile.gd" id="1_a85iw"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_a85iw"]
+a = Vector2(1, -9)
+b = Vector2(1, -2)
+
+[node name="projectile" type="Area2D" unique_id=458065739]
+script = ExtResource("1_a85iw")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=671704561]
+position = Vector2(22, 8)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-22.176968, -29.334818, -16.100258, -23.354712, -21.931274, -19.998522, -27.397171, -23.354712)
+uv = PackedVector2Array(-26.5, -33, 25.5, -33, 7.5, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=711275050]
+position = Vector2(-1, -11)
+shape = SubResource("SegmentShape2D_a85iw")

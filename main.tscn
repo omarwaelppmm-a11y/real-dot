@@ -192,3 +192,13 @@ theme_override_fonts/font = SubResource("FontFile_h2yge")
 theme_override_font_sizes/font_size = 22
 text = "100 / 100"
 horizontal_alignment = 1
+
+[node name="PipesText" type="Label" parent="CanvasLayer" unique_id=1107370680]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -95.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.6313726, 0.39215687, 1)
+text = "Pipes: 0"

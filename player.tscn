@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://dqjfbc4duoli"]
 
 [ext_resource type="Script" uid="uid://gunjr3ecckai" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://c4heuxkw1efi" path="res://projectile.tscn" id="2_onrkg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 58.549126
 
 [node name="Player" type="CharacterBody2D" unique_id=109719056]
 script = ExtResource("1_onrkg")
+projectile_scene = ExtResource("2_onrkg")
 
 [node name="head" type="Polygon2D" parent="." unique_id=1264296308]
 position = Vector2(3, 12)
@@ -34,18 +36,18 @@ offset_bottom = 26.0
 color = Color(0.30588236, 0.14117648, 0, 1)
 
 [node name="WingLeft" type="ColorRect" parent="." unique_id=1908332407]
-offset_left = -77.0
-offset_top = -10.0
-offset_right = -37.0
-offset_bottom = 30.0
+offset_left = -73.0
+offset_top = 1.0
+offset_right = -33.0
+offset_bottom = 41.0
 pivot_offset_ratio = Vector2(40, 0)
 color = Color(0.61960787, 0.61960787, 0.61960787, 0.3254902)
 
 [node name="WingRigh" type="ColorRect" parent="." unique_id=1029019042]
-offset_left = 35.0
-offset_top = -9.0
-offset_right = 75.0
-offset_bottom = 31.0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 42.0
 color = Color(0.61960787, 0.61960787, 0.61960787, 0.3254902)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=5090434]

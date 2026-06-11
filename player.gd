@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var max_health: float = 40.0
 @export var wave_frequency: float = 25.0  
 
+@export var projectile_scene: PackedScene
+
 @onready var head: Polygon2D = $head
 @onready var body: Polygon2D = $body
 @onready var stripe_1: ColorRect = $Stripe1
@@ -15,14 +17,20 @@ extends CharacterBody2D
 @onready var eye_right: ColorRect = $"eye right"
 @onready var eye_left: ColorRect = $"eye left"
 
+# --- UI NODES ---
 @onready var game_over_screen: Control = get_node_or_null("../CanvasLayer/GameOverScreen")
 @onready var health_bar: ProgressBar = get_node_or_null("../CanvasLayer/HealthBar")
 @onready var catch_up_bar: ProgressBar = get_node_or_null("../CanvasLayer/CatchUpBar")
-@onready var current_health_label: Label = get_node_or_null("../CanvasLayer/CurrentHealthLabel")
-@onready var max_health_label: Label = get_node_or_null("../CanvasLayer/MaxHealthLabel")
+@onready var health_text_label: Label = get_node_or_null("../CanvasLayer/HealthBar/HealthText")
+
+# NEW: Reference to the Pipes counter UI label
+@onready var pipes_text_label: Label = get_node_or_null("../CanvasLayer/PipesText")
 
 var current_health: float
 var time_passed: float = 0.0
+
+# NEW: Track pipe currency score
+var pipes_score: int = 0
 
 func _ready() -> void:
 	current_health = max_health
@@ -39,6 +47,7 @@ func _ready() -> void:
 		catch_up_bar.value = current_health
 
 	update_health_ui()
+	update_pipes_ui()
 
 func _process(delta: float) -> void:
 	if velocity.length() > 0:
@@ -58,6 +67,45 @@ func _process(delta: float) -> void:
 	if is_instance_valid(catch_up_bar) and is_instance_valid(health_bar):
 		catch_up_bar.value = lerp(catch_up_bar.value, health_bar.value, 5.0 * delta)
 
+	if Input.is_action_just_pressed("click"):
+		shoot()
+
+func shoot() -> void:
+	if projectile_scene:
+		var projectile_instance = projectile_scene.instantiate()
+		projectile_instance.global_position = global_position
+		
+		var mouse_pos = get_global_mouse_position()
+		projectile_instance.direction = global_position.direction_to(mouse_pos).normalized()
+		
+		get_tree().current_scene.add_child(projectile_instance)
+
+func take_damage(amount: float) -> void:
+	current_health -= amount
+	current_health = max(0.0, current_health)
+	
+	update_health_ui()
+	
+	if current_health <= 0:
+		die()
+
+# NEW: Increments the player currency and updates UI completely cleanly
+func add_pipe() -> void:
+	pipes_score += 1
+	update_pipes_ui()
+
+func update_health_ui() -> void:
+	if is_instance_valid(health_bar):
+		health_bar.value = current_health
+		
+	if is_instance_valid(health_text_label):
+		health_text_label.text = str(ceil(current_health)) + "H"
+
+# NEW: Handles updating the pipe visual UI text cleanly
+func update_pipes_ui() -> void:
+	if is_instance_valid(pipes_text_label):
+		pipes_text_label.text = "Pipes: " + str(pipes_score)
+
 func _physics_process(_delta: float) -> void:
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = direction * speed
@@ -67,27 +115,7 @@ func _physics_process(_delta: float) -> void:
 		
 	move_and_slide()
 
-func take_damage(amount: float) -> void:
-	current_health -= amount
-	print("💥 Tracker Updated! Hours remaining: ", current_health)
-	
-	update_health_ui()
-	
-	if current_health <= 0:
-		die()
-
-func update_health_ui() -> void:
-	if is_instance_valid(health_bar):
-		health_bar.value = current_health
-		
-	if is_instance_valid(current_health_label):
-		current_health_label.text = str(current_health) + "H"
-		
-	if is_instance_valid(max_health_label):
-		max_health_label.text = str(int(max_health)) + "H TO QUALIFY"
-
 func die() -> void:
-	print("💀 Target Reached!")
 	if is_instance_valid(game_over_screen):
 		game_over_screen.show()
 	get_tree().paused = true
