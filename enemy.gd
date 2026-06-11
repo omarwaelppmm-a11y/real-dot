@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 var player: Node2D = null
 var current_health: float 
+var spawner_ref: Node = null
 
 func _ready() -> void:
 	player = get_node_or_null("/root/Main/Player")
@@ -24,14 +25,19 @@ func _physics_process(delta: float) -> void:
 				if body.name == "Player" and body.has_method("take_damage"):
 					body.take_damage(damage_per_second * delta)
 
+func assign_spawner(spawner_node: Node) -> void:
+	spawner_ref = spawner_node
+
 func take_damage(amount: float) -> void:
 	current_health -= amount
-	
 	if current_health <= 0:
 		die()
 
 func die() -> void:
-	
 	if is_instance_valid(player) and player.has_method("add_pipe"):
 		player.add_pipe()
+		
+	if is_instance_valid(spawner_ref) and spawner_ref.has_method("report_enemy_death"):
+		spawner_ref.report_enemy_death()
+		
 	queue_free()

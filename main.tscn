@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dqjfbc4duoli" path="res://player.tscn" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://crm2fs8siwfof" path="res://game_over_screen.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://bp31gun0xrali" path="res://Assets/back.png" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://cvd8krreyt2nu" path="res://EnemySpawner.gd" id="5_lquwl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 normal = Vector2(-0.016126934, 0.99986994)
@@ -65,6 +66,11 @@ cache/0/22/0/descent = 0.0
 cache/0/22/0/underline_position = 0.0
 cache/0/22/0/underline_thickness = 0.0
 cache/0/22/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
 
 [node name="Main" type="Node2D" unique_id=1658041836]
 
@@ -187,9 +193,9 @@ offset_left = 4.0
 offset_top = 40.0
 offset_right = 44.0
 offset_bottom = 63.0
-theme_override_colors/font_color = Color(1, 0.6306784, 0.39276153, 1)
+theme_override_colors/font_color = Color(0.32156864, 0.20392157, 0.1254902, 1)
 theme_override_fonts/font = SubResource("FontFile_h2yge")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 24
 text = "100 / 100"
 horizontal_alignment = 1
 
@@ -200,5 +206,38 @@ anchor_right = 1.0
 offset_left = -95.0
 offset_bottom = 23.0
 grow_horizontal = 0
-theme_override_colors/font_color = Color(1, 0.6313726, 0.39215687, 1)
+theme_override_colors/font_color = Color(0.32156864, 0.20392157, 0.1254902, 1)
+theme_override_font_sizes/font_size = 24
 text = "Pipes: 0"
+
+[node name="RoundTrackerText" type="Label" parent="CanvasLayer" unique_id=431517779]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.5
+offset_right = 66.0
+offset_bottom = 37.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.32156864, 0.20392157, 0.1254902, 1)
+theme_override_font_sizes/font_size = 24
+text = "ROUND: 1"
+
+[node name="RoundFlashText" type="Label" parent="CanvasLayer" unique_id=627572279]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -19.0
+offset_right = 63.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.32156864, 0.20392157, 0.1254902, 1)
+theme_override_font_sizes/font_size = 28
+text = "ROUND 1 START"
+
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=1488771905]
+script = ExtResource("5_lquwl")
+enemy_scene = ExtResource("1_0xm2m")
