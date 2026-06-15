@@ -78,6 +78,12 @@ content_margin_left = 10.0
 content_margin_top = 5.0
 bg_color = Color(0.49019608, 0.45882353, 0.3764706, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+bg_color = Color(0.05, 0.05, 0.05, 1)
+
 [node name="Main" type="Node2D" unique_id=1658041836]
 
 [node name="PaperBackground" type="TextureRect" parent="." unique_id=186100391]
@@ -98,7 +104,7 @@ expand_mode = 1
 [node name="Enemy" parent="." unique_id=1571408113 instance=ExtResource("1_0xm2m")]
 position = Vector2(487, 345)
 
-[node name="Player" parent="." unique_id=109719056 instance=ExtResource("2_h2yge")]
+[node name="Player" parent="." unique_id=109719056 groups=["Player"] instance=ExtResource("2_h2yge")]
 position = Vector2(887, 238)
 
 [node name="The Ring" type="Node" parent="." unique_id=1760894182]
@@ -292,31 +298,42 @@ text = "PIPES: 0"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/ShopUI/VBoxContainer" unique_id=470039707]
 layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
 
 [node name="card1" type="PanelContainer" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2" unique_id=1239183716]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card1" unique_id=452926923]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card1/VBoxContainer" unique_id=220848057]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
 [node name="BuyFireRate" type="Button" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card1/VBoxContainer" unique_id=394695033]
 layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5vw27")
 text = "Fire Rate"
 
 [node name="card2" type="PanelContainer" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2" unique_id=1558564028]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card2" unique_id=1370348448]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card2/VBoxContainer" unique_id=1418472572]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
 [node name="BuyDamage" type="Button" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card2/VBoxContainer" unique_id=634957904]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
 text = "Damage"
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=1488771905]

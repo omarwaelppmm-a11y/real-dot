@@ -25,7 +25,10 @@ func toggle_shop() -> void:
 		hide()
 		get_tree().paused = false
 	else:
-		player = get_node_or_null("/root/Main/Player")
+		player = get_tree().get_first_node_in_group("player")
+		if not is_instance_valid(player):
+			player = get_node_or_null("/root/Main/Player")
+		
 		if is_instance_valid(player):
 			gun = player.get_node_or_null("Gun")
 		
@@ -34,24 +37,32 @@ func toggle_shop() -> void:
 		get_tree().paused = true
 
 func update_shop_ui() -> void:
-	if is_instance_valid(player) and "pipes" in player:
-		pipe_display_label.text = "PIPES: " + str(player.pipes)
+	player = get_tree().get_first_node_in_group("player")
+	if not is_instance_valid(player):
+		player = get_node_or_null("/root/Main/Player")
+	
+	if is_instance_valid(player) and "pipes_score" in player:
+		pipe_display_label.text = "PIPES: " + str(player.pipes_score)
+	else:
+		pipe_display_label.text = "PIPES: 0"
 	
 	buy_fire_rate_btn.text = str(fire_rate_cost) + " PIPES"
 	buy_damage_btn.text = str(damage_cost) + " PIPES"
 
 func _on_buy_fire_rate() -> void:
 	if not is_instance_valid(player) or not is_instance_valid(gun): return
-	if player.pipes >= fire_rate_cost:
-		player.pipes -= fire_rate_cost
+	if player.pipes_score >= fire_rate_cost:
+		player.pipes_score -= fire_rate_cost
+		player.update_pipes_ui()
 		gun.fire_rate = max(0.04, gun.fire_rate - 0.02)
 		fire_rate_cost = int(fire_rate_cost * 1.5)
 		update_shop_ui()
 
 func _on_buy_damage() -> void:
 	if not is_instance_valid(player) or not is_instance_valid(gun): return
-	if player.pipes >= damage_cost:
-		player.pipes -= damage_cost
+	if player.pipes_score >= damage_cost:
+		player.pipes_score -= damage_cost
+		player.update_pipes_ui()
 		if "damage" in gun:
 			gun.damage += 5.0
 		damage_cost = int(damage_cost * 1.5)
