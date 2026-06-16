@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bp31gun0xrali" path="res://Assets/back.png" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://6y2xgucyd1xn" path="res://shop_ui.gd" id="5_7mycd"]
 [ext_resource type="Script" uid="uid://cvd8krreyt2nu" path="res://EnemySpawner.gd" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://oh263bxqcrj6" path="res://Assets/Screenshot 2026-06-15 073419.png" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://b8lduqpv4mikg" path="res://Assets/Hack cllub.png" id="7_5vw27"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 normal = Vector2(-0.016126934, 0.99986994)
@@ -259,14 +261,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_7mycd")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ShopUI" unique_id=897694658]
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/ShopUI" unique_id=1354382347]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.5882353)
+texture = ExtResource("6_272bh")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ShopUI" unique_id=904581540]
 layout_mode = 1
@@ -309,7 +311,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card1/VBoxContainer" unique_id=220848057]
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card1/VBoxContainer" unique_id=612566749]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
@@ -327,9 +329,11 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card2/VBoxContainer" unique_id=1418472572]
-custom_minimum_size = Vector2(0, 150)
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card2/VBoxContainer" unique_id=1653675815]
+custom_minimum_size = Vector2(112.5, 150)
 layout_mode = 2
+texture = ExtResource("7_5vw27")
+expand_mode = 1
 
 [node name="BuyDamage" type="Button" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card2/VBoxContainer" unique_id=634957904]
 layout_mode = 2

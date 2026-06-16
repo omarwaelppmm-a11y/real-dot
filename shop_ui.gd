@@ -1,19 +1,20 @@
 extends Control
 
 @onready var pipe_display_label: Label = get_node("VBoxContainer/PanelContainer/HBoxContainer/PipeDisplayLabel")
-@onready var buy_fire_rate_btn: Button = get_node("VBoxContainer/HBoxContainer2/card1/VBoxContainer/BuyFireRate")
+@onready var buy_weapon_btn: Button = get_node("VBoxContainer/HBoxContainer2/card1/VBoxContainer/BuyFireRate")
 @onready var buy_damage_btn: Button = get_node("VBoxContainer/HBoxContainer2/card2/VBoxContainer/BuyDamage")
 
 var player: CharacterBody2D = null
 var gun: Node2D = null
 
-var fire_rate_cost: int = 5
+var weapon_cost: int = 25
 var damage_cost: int = 5
+var weapon_unlocked: bool = false
 
 func _ready() -> void:
 	hide()
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	buy_fire_rate_btn.pressed.connect(_on_buy_fire_rate)
+	buy_weapon_btn.pressed.connect(_on_buy_weapon)
 	buy_damage_btn.pressed.connect(_on_buy_damage)
 
 func _input(event: InputEvent) -> void:
@@ -46,16 +47,24 @@ func update_shop_ui() -> void:
 	else:
 		pipe_display_label.text = "PIPES: 0"
 	
-	buy_fire_rate_btn.text = str(fire_rate_cost) + " PIPES"
+	if weapon_unlocked:
+		buy_weapon_btn.text = "EQUIPPED"
+		buy_weapon_btn.disabled = true
+	else:
+		buy_weapon_btn.text = "LASER: " + str(weapon_cost) + " PIPES"
+		
 	buy_damage_btn.text = str(damage_cost) + " PIPES"
 
-func _on_buy_fire_rate() -> void:
+func _on_buy_weapon() -> void:
 	if not is_instance_valid(player) or not is_instance_valid(gun): return
-	if player.pipes_score >= fire_rate_cost:
-		player.pipes_score -= fire_rate_cost
+	if player.pipes_score >= weapon_cost and not weapon_unlocked:
+		player.pipes_score -= weapon_cost
 		player.update_pipes_ui()
-		gun.fire_rate = max(0.04, gun.fire_rate - 0.02)
-		fire_rate_cost = int(fire_rate_cost * 1.5)
+		
+		weapon_unlocked = true
+		if gun.has_method("swap_to_laser"):
+			gun.swap_to_laser()
+			
 		update_shop_ui()
 
 func _on_buy_damage() -> void:
