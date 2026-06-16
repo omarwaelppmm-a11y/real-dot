@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d1t1rnioikjbw"]
+
+[ext_resource type="Texture2D" uid="uid://bb80k33gsprx" path="res://Assets/STATIS SHOTGUN.png" id="1_nsr3l"]
+[ext_resource type="Script" uid="uid://bxc5bmjavufe7" path="res://statis_shotgun.gd" id="1_yx80q"]
+
+[node name="statis shotgun" type="Node2D" unique_id=2144925364]
+scale = Vector2(0.15589605, 0.2386578)
+script = ExtResource("1_yx80q")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=181723590]
+scale = Vector2(0.70819247, 0.53607124)
+texture = ExtResource("1_nsr3l")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=503924622]
+position = Vector2(440, 0)
+scale = Vector2(421.74185, -127.10082)

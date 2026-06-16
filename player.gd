@@ -27,6 +27,9 @@ extends CharacterBody2D
 
 @onready var pipes_text_label: Label = get_node_or_null("../CanvasLayer/PipesText")
 
+@onready var default_gun: Node2D = $Gun
+@onready var statis_shotgun: Node2D = $"statis shotgun"
+
 var current_health: float
 var time_passed: float = 0.0
 
@@ -52,6 +55,7 @@ func _ready() -> void:
 
 	update_health_ui()
 	update_pipes_ui()
+	update_weapon_visibility(false)
 
 func _process(delta: float) -> void:
 	if velocity.length() > 0:
@@ -70,6 +74,22 @@ func _process(delta: float) -> void:
 			
 	if is_instance_valid(catch_up_bar) and is_instance_valid(health_bar):
 		catch_up_bar.value = lerp(catch_up_bar.value, health_bar.value, 5.0 * delta)
+
+func update_weapon_visibility(shotgun_unlocked: bool) -> void:
+	if is_instance_valid(statis_shotgun) and is_instance_valid(default_gun):
+		if shotgun_unlocked:
+			statis_shotgun.visible = true
+			statis_shotgun.set_process(true)
+			default_gun.visible = false
+			default_gun.set_process(false)
+		else:
+			statis_shotgun.visible = false
+			statis_shotgun.set_process(false)
+			default_gun.visible = true
+			default_gun.set_process(true)
+
+func swap_to_laser() -> void:
+	update_weapon_visibility(true)
 
 func take_damage(amount: float) -> void:
 	current_health -= amount
@@ -103,7 +123,9 @@ func _physics_process(_delta: float) -> void:
 		velocity = direction * speed
 		
 		if direction.x != 0:
-			transform.x.x = sign(direction.x)
+			var target_scale_x = sign(direction.x)
+			if is_instance_valid(head): head.scale.x = target_scale_x
+			if is_instance_valid(body): body.scale.x = target_scale_x
 			
 		if Input.is_action_just_pressed("dash") and can_dash and direction != Vector2.ZERO:
 			start_dash(direction)
@@ -129,7 +151,6 @@ func spawn_ghosts_loop() -> void:
 func create_ghost_instance() -> void:
 	var ghost = Node2D.new()
 	ghost.global_position = global_position
-	ghost.transform.x.x = transform.x.x
 	
 	for child in get_children():
 		if child is Polygon2D or child is ColorRect:

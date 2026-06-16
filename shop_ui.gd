@@ -5,7 +5,6 @@ extends Control
 @onready var buy_damage_btn: Button = get_node("VBoxContainer/HBoxContainer2/card2/VBoxContainer/BuyDamage")
 
 var player: CharacterBody2D = null
-var gun: Node2D = null
 
 var weapon_cost: int = 25
 var damage_cost: int = 5
@@ -30,9 +29,6 @@ func toggle_shop() -> void:
 		if not is_instance_valid(player):
 			player = get_node_or_null("/root/Main/Player")
 		
-		if is_instance_valid(player):
-			gun = player.get_node_or_null("Gun")
-		
 		update_shop_ui()
 		show()
 		get_tree().paused = true
@@ -56,23 +52,24 @@ func update_shop_ui() -> void:
 	buy_damage_btn.text = str(damage_cost) + " PIPES"
 
 func _on_buy_weapon() -> void:
-	if not is_instance_valid(player) or not is_instance_valid(gun): return
+	if not is_instance_valid(player): return
 	if player.pipes_score >= weapon_cost and not weapon_unlocked:
 		player.pipes_score -= weapon_cost
 		player.update_pipes_ui()
 		
 		weapon_unlocked = true
-		if gun.has_method("swap_to_laser"):
-			gun.swap_to_laser()
+		if player.has_method("swap_to_laser"):
+			player.swap_to_laser()
 			
 		update_shop_ui()
 
 func _on_buy_damage() -> void:
-	if not is_instance_valid(player) or not is_instance_valid(gun): return
-	if player.pipes_score >= damage_cost:
+	if not is_instance_valid(player): return
+	var active_gun = player.get_node_or_null("Gun") if not weapon_unlocked else player.get_node_or_null("statis_shotgun")
+	if player.pipes_score >= damage_cost and is_instance_valid(active_gun):
 		player.pipes_score -= damage_cost
 		player.update_pipes_ui()
-		if "damage" in gun:
-			gun.damage += 5.0
+		if "damage" in active_gun:
+			active_gun.damage += 5.0
 		damage_cost = int(damage_cost * 1.5)
 		update_shop_ui()

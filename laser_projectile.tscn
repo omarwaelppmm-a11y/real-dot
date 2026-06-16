@@ -1,7 +1,35 @@
 [gd_scene format=3 uid="uid://6gddm8ok38fp"]
 
-[node name="laser_projectile" type="Area2D" unique_id=219017670]
+[ext_resource type="Script" uid="uid://bddnendxjpts0" path="res://laser_projectile.gd" id="1_yagdn"]
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1674480102]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yagdn"]
+size = Vector2(227.95938, 117)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_12w58"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(114, 25, 1)
+initial_velocity_min = 80.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 1.0000001
+orbit_velocity_max = 2.5000002
+gravity = Vector3(0, 98, 0)
+color = Color(0.5028399, 0.1404, 0.78, 1)
+
+[node name="laser_projectile" type="Area2D" unique_id=219017670]
+script = ExtResource("1_yagdn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1226330699]
+position = Vector2(114, 0)
+scale = Vector2(1, 0.269)
+shape = SubResource("RectangleShape2D_yagdn")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=427849777]
+position = Vector2(114, 0)
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_12w58")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=239861747]
+points = PackedVector2Array(0, 0, 228, 0)
+width = 50.0
+begin_cap_mode = 2
+end_cap_mode = 2

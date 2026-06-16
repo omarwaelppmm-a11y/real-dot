@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://gunjr3ecckai" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://c4heuxkw1efi" path="res://projectile.tscn" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://d1t1rnioikjbw" path="res://statis_shotgun.tscn" id="3_hqtel"]
 [ext_resource type="PackedScene" uid="uid://dhc0jq8wekjon" path="res://gun.tscn" id="3_i3pqv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
@@ -96,3 +97,6 @@ offset_bottom = -28.0
 [node name="Gun" parent="." unique_id=287979295 instance=ExtResource("3_i3pqv")]
 position = Vector2(87, 16)
 projectile_scene = ExtResource("2_onrkg")
+
+[node name="statis shotgun" parent="." unique_id=2144925364 instance=ExtResource("3_hqtel")]
+position = Vector2(71, -8)
