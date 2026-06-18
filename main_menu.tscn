@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://4qk4a2akc560"]
+
+[ext_resource type="Script" uid="uid://byno40assevvg" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="Control" unique_id=1333538615 node_paths=PackedStringArray("start_button", "volume_slider")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+gameplay_scene_path = "uid://br18uvvn0c7h0"
+start_button = NodePath("HBoxContainer/LeftMenuArea/StartButton")
+volume_slider = NodePath("HBoxContainer/LeftMenuArea/AudioContainer/VolumeSlider")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1042394516]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftMenuArea" type="VBoxContainer" parent="HBoxContainer" unique_id=1179903472]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Title" type="Label" parent="HBoxContainer/LeftMenuArea" unique_id=1610874345]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Beest"
+
+[node name="StartButton" type="Button" parent="HBoxContainer/LeftMenuArea" unique_id=2029560906]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start"
+
+[node name="AudioContainer" type="HBoxContainer" parent="HBoxContainer/LeftMenuArea" unique_id=665672483]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
+
+[node name="AudioLabel" type="Label" parent="HBoxContainer/LeftMenuArea/AudioContainer" unique_id=189921234]
+custom_minimum_size = Vector2(50, 0)
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+text = "Music"
+
+[node name="VolumeSlider" type="HSlider" parent="HBoxContainer/LeftMenuArea/AudioContainer" unique_id=821636203]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="RightAvatarArea" type="CenterContainer" parent="HBoxContainer" unique_id=790777890]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AvatarTexture" type="TextureRect" parent="HBoxContainer/RightAvatarArea" unique_id=710958074]
+layout_mode = 2
