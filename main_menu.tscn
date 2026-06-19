@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://byno40assevvg" path="res://main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://bp8uoduiyg5sb" path="res://Assets/background.png" id="2_jix8l"]
+[ext_resource type="Texture2D" uid="uid://doaoia8ljnk4v" path="res://Assets/brown wood plank.png" id="2_nlkkf"]
 [ext_resource type="Script" uid="uid://cuetsrnuafc0n" path="res://avatar_texture.gd" id="3_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://20ubdioxekev" path="res://Assets/avatar again.png" id="3_glbon"]
 [ext_resource type="Texture2D" uid="uid://bxut27nab2klq" path="res://Assets/backkkc_back-removebg-preview (1).png" id="5_glbon"]
@@ -40,6 +41,20 @@ gameplay_scene_path = "uid://br18uvvn0c7h0"
 start_button = NodePath("HBoxContainer/LeftMenuArea/StartButton")
 volume_slider = NodePath("HBoxContainer/LeftMenuArea/AudioContainer/VolumeSlider")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=871820641]
+clip_contents = true
+custom_minimum_size = Vector2(0, 800)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_nlkkf")
+expand_mode = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1042394516]
 layout_mode = 1
 anchors_preset = 15
@@ -57,11 +72,18 @@ alignment = 1
 [node name="Title" type="Label" parent="HBoxContainer/LeftMenuArea" unique_id=1610874345]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Beest"
+theme_override_colors/font_color = Color(0.8784314, 0.9372549, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "# Beest"
 
 [node name="StartButton" type="Button" parent="HBoxContainer/LeftMenuArea" unique_id=2029560906]
+custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0.82, 0.738, 0.574, 1)
+theme_override_font_sizes/font_size = 28
 text = "Start"
 
 [node name="AudioContainer" type="HBoxContainer" parent="HBoxContainer/LeftMenuArea" unique_id=665672483]
@@ -74,15 +96,15 @@ theme_override_constants/separation = 40
 custom_minimum_size = Vector2(50, 0)
 layout_direction = 3
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
+size_flags_vertical = 1
 size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0.81960785, 0.7372549, 0.57254905, 1)
+theme_override_font_sizes/font_size = 28
 text = "Music"
 
 [node name="VolumeSlider" type="HSlider" parent="HBoxContainer/LeftMenuArea/AudioContainer" unique_id=821636203]
 custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LeftMenuArea" unique_id=871820641]
 layout_mode = 2
 
 [node name="RightAvatarArea" type="CenterContainer" parent="HBoxContainer" unique_id=790777890]
