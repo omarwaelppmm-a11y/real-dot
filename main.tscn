@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cvd8krreyt2nu" path="res://EnemySpawner.gd" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://oh263bxqcrj6" path="res://Assets/Screenshot 2026-06-15 073419.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://b8lduqpv4mikg" path="res://Assets/Hack cllub.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://bb80k33gsprx" path="res://Assets/STATIS SHOTGUN.png" id="7_kek77"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 normal = Vector2(-0.016126934, 0.99986994)
@@ -104,10 +105,10 @@ texture = ExtResource("4_1bvp3")
 expand_mode = 1
 
 [node name="Enemy" parent="." unique_id=1571408113 instance=ExtResource("1_0xm2m")]
-position = Vector2(487, 345)
+position = Vector2(-1395, -322)
 
 [node name="Player" parent="." unique_id=109719056 groups=["Player"] instance=ExtResource("2_h2yge")]
-position = Vector2(887, 238)
+position = Vector2(581, 344)
 
 [node name="The Ring" type="Node" parent="." unique_id=1760894182]
 
@@ -314,12 +315,14 @@ theme_override_constants/separation = 15
 [node name="ColorRect" type="TextureRect" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card1/VBoxContainer" unique_id=612566749]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
+texture = ExtResource("7_kek77")
+expand_mode = 1
 
 [node name="BuyFireRate" type="Button" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2/card1/VBoxContainer" unique_id=394695033]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_5vw27")
-text = "Fire Rate"
+text = "Statis shotgun"
 
 [node name="card2" type="PanelContainer" parent="CanvasLayer/ShopUI/VBoxContainer/HBoxContainer2" unique_id=1558564028]
 custom_minimum_size = Vector2(200, 0)

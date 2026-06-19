@@ -2,7 +2,6 @@ extends Control
 
 @onready var master_bus_index = AudioServer.get_bus_index("Master")
 
-# 1. Export variables for the scene path and the UI nodes
 @export_file("*.tscn") var gameplay_scene_path: String = ""
 @export var start_button: Button
 @export var volume_slider: HSlider
@@ -10,14 +9,14 @@ extends Control
 func _ready() -> void:
 	get_tree().paused = false
 	
-	# 2. Safety check: ensure you assigned the nodes in the Inspector
 	if is_instance_valid(start_button):
 		start_button.pressed.connect(_on_start_pressed)
 	else:
 		push_error("MainMenu Error: Start Button is not assigned in the Inspector!")
 		
 	if is_instance_valid(volume_slider):
-		volume_slider.value_changed.connect(_on_volume_changed)
+		volume_slider.value_changed.connect(_on_volume_slider_value_changed)
+		volume_slider.value = db_to_linear(AudioServer.get_bus_volume_db(master_bus_index))
 	else:
 		push_error("MainMenu Error: Volume Slider is not assigned in the Inspector!")
 
@@ -28,9 +27,5 @@ func _on_start_pressed() -> void:
 	else:
 		push_error("MainMenu Error: Gameplay scene path is empty or invalid!")
 
-func _on_volume_changed(value: float) -> void:
-	if value <= -39:
-		AudioServer.set_bus_mute(master_bus_index, true)
-	else:
-		AudioServer.set_bus_mute(master_bus_index, false)
-		AudioServer.set_bus_volume_db(master_bus_index, value)
+func _on_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(master_bus_index, linear_to_db(value))

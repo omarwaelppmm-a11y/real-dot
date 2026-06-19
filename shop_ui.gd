@@ -6,8 +6,8 @@ extends Control
 
 var player: CharacterBody2D = null
 
-var weapon_cost: int = 25
-var damage_cost: int = 5
+var weapon_cost: int = 50
+var damage_cost: int = 50
 var weapon_unlocked: bool = false
 
 func _ready() -> void:

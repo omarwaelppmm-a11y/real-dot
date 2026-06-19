@@ -106,6 +106,10 @@ text = "Music"
 [node name="VolumeSlider" type="HSlider" parent="HBoxContainer/LeftMenuArea/AudioContainer" unique_id=821636203]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+min_value = 0.001
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="RightAvatarArea" type="CenterContainer" parent="HBoxContainer" unique_id=790777890]
 layout_mode = 2
