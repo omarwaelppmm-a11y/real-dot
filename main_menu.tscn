@@ -1,6 +1,32 @@
 [gd_scene format=3 uid="uid://4qk4a2akc560"]
 
 [ext_resource type="Script" uid="uid://byno40assevvg" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://bp8uoduiyg5sb" path="res://Assets/background.png" id="2_jix8l"]
+[ext_resource type="Script" uid="uid://cuetsrnuafc0n" path="res://avatar_texture.gd" id="3_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://20ubdioxekev" path="res://Assets/avatar again.png" id="3_glbon"]
+[ext_resource type="Texture2D" uid="uid://bxut27nab2klq" path="res://Assets/backkkc_back-removebg-preview (1).png" id="5_glbon"]
+
+[sub_resource type="Shader" id="Shader_fu7sn"]
+code = "shader_type canvas_item;
+
+uniform float speed = 1.0;
+uniform float height_amplitude = 0.0;
+uniform float vertical_scale_amplitude = 0.01;
+
+void vertex() {
+	float wave = sin(TIME * speed);
+	float smooth_wave = sign(wave) * pow(abs(wave), 0.7);
+	
+	VERTEX.y += smooth_wave * height_amplitude;
+	
+	VERTEX.y *= 1.0 + (smooth_wave * vertical_scale_amplitude);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jix8l"]
+shader = SubResource("Shader_fu7sn")
+shader_parameter/speed = 2.0
+shader_parameter/height_amplitude = 12.0
+shader_parameter/vertical_scale_amplitude = 0.03
 
 [node name="MainMenu" type="Control" unique_id=1333538615 node_paths=PackedStringArray("start_button", "volume_slider")]
 layout_mode = 3
@@ -56,9 +82,41 @@ text = "Music"
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LeftMenuArea" unique_id=871820641]
+layout_mode = 2
+
 [node name="RightAvatarArea" type="CenterContainer" parent="HBoxContainer" unique_id=790777890]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="background" type="TextureRect" parent="HBoxContainer/RightAvatarArea" unique_id=426908745]
+clip_contents = true
+custom_minimum_size = Vector2(800, 650)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_jix8l")
+expand_mode = 2
 
 [node name="AvatarTexture" type="TextureRect" parent="HBoxContainer/RightAvatarArea" unique_id=710958074]
+material = SubResource("ShaderMaterial_jix8l")
+clip_contents = true
+custom_minimum_size = Vector2(800, 700)
 layout_mode = 2
+texture = ExtResource("3_glbon")
+expand_mode = 2
+stretch_mode = 3
+flip_h = true
+script = ExtResource("3_fu7sn")
+
+[node name="BackkkcBackRemovebgPreview(1)" type="Sprite2D" parent="." unique_id=1662160359]
+position = Vector2(574.6807, 695)
+rotation = 4.712389
+scale = Vector2(1, 1.1287177)
+texture = ExtResource("5_glbon")
+
+[node name="BackkkcBackRemovebgPreview(1)2" type="Sprite2D" parent="." unique_id=158249915]
+position = Vector2(629.32996, -76.99999)
+rotation = 1.5707964
+scale = Vector2(1, 1.2033077)
+texture = ExtResource("5_glbon")
