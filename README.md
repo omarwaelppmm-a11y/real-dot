@@ -6,7 +6,7 @@
 
 ## How to play the game:
 
-The game is played by controlling your player using the keyboard to move, mous to aim, and survive against waves of tracking enemies. Use your mouse to point and shoot your projectile weapons, and collect the rotating honey jars that spawn around the map to heal your damage before they vanish. 
+The game is played by controlling your player using the keyboard to move, mous to aim, and survive against waves of tracking enemies. Use your mouse to point and shoot your projectile weapons, and collect the rotating honey jars that spawn around the map to heal your damage before they vanish. [ oh btww while naming the project in the beest dashboard i named it bees by a mistake :|
 
 Wear your headphones for smooth playing and sound on maximum.
 Try to focus on every detail <3
