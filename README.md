@@ -15,7 +15,7 @@ Playable URL:-
 
 ## Why I made it: 
 
-Made it to create a tense, high-energy arcade survival experience. Balancing the enemy tracking logic with custom boundary mechanics kept me on my toes, and tweaking the survival loop while testing was incredibly fun.
+While getting a review the reviewer said make sure to type it is made for bees so the plalyer is a bee and the game is about beest, that is it it was supposed to be a dot but i thought that is a better idea.
 
 ## Features <3
 
