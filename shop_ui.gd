@@ -2,19 +2,20 @@ extends Control
 
 @onready var pipe_display_label: Label = get_node("VBoxContainer/PanelContainer/HBoxContainer/PipeDisplayLabel")
 @onready var buy_weapon_btn: Button = get_node("VBoxContainer/HBoxContainer2/card1/VBoxContainer/BuyFireRate")
-@onready var buy_damage_btn: Button = get_node("VBoxContainer/HBoxContainer2/card2/VBoxContainer/BuyDamage")
+@onready var buy_nausea_btn: Button = get_node("VBoxContainer/HBoxContainer2/card2/VBoxContainer/BuyDamage")
 
 var player: CharacterBody2D = null
 
 var weapon_cost: int = 50
-var damage_cost: int = 50
+var nausea_cost: int = 51
 var weapon_unlocked: bool = false
+var nausea_bought: bool = false
 
 func _ready() -> void:
 	hide()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	buy_weapon_btn.pressed.connect(_on_buy_weapon)
-	buy_damage_btn.pressed.connect(_on_buy_damage)
+	buy_nausea_btn.pressed.connect(_on_buy_nausea)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_shop"):
@@ -49,7 +50,11 @@ func update_shop_ui() -> void:
 	else:
 		buy_weapon_btn.text = "LASER: " + str(weapon_cost) + " PIPES"
 		
-	buy_damage_btn.text = str(damage_cost) + " PIPES"
+	if nausea_bought:
+		buy_nausea_btn.text = "HACK CLUB ACTIVE"
+		buy_nausea_btn.disabled = true
+	else:
+		buy_nausea_btn.text = "HACK CLUB: " + str(nausea_cost) + " PIPES"
 
 func _on_buy_weapon() -> void:
 	if not is_instance_valid(player): return
@@ -63,13 +68,16 @@ func _on_buy_weapon() -> void:
 			
 		update_shop_ui()
 
-func _on_buy_damage() -> void:
+func _on_buy_nausea() -> void:
 	if not is_instance_valid(player): return
-	var active_gun = player.get_node_or_null("Gun") if not weapon_unlocked else player.get_node_or_null("statis_shotgun")
-	if player.pipes_score >= damage_cost and is_instance_valid(active_gun):
-		player.pipes_score -= damage_cost
+	if player.pipes_score >= nausea_cost and not nausea_bought:
+		player.pipes_score -= nausea_cost
 		player.update_pipes_ui()
-		if "damage" in active_gun:
-			active_gun.damage += 5.0
-		damage_cost = int(damage_cost * 1.5)
+		
+		nausea_bought = true
+		if player.has_method("apply_nausea"):
+			player.apply_nausea()
+			
 		update_shop_ui()
+		
+		

@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://oh263bxqcrj6" path="res://Assets/Screenshot 2026-06-15 073419.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://b8lduqpv4mikg" path="res://Assets/Hack cllub.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bb80k33gsprx" path="res://Assets/STATIS SHOTGUN.png" id="7_kek77"]
+[ext_resource type="Shader" uid="uid://b1elgm7y4infh" path="res://nausea.gdshader" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://cjnrryu3mcjii" path="res://foodspawner.gd" id="11_efxa6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 normal = Vector2(-0.016126934, 0.99986994)
@@ -25,6 +27,9 @@ distance = 21.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lquwl"]
 normal = Vector2(-0.010203551, -0.9999479)
 distance = 65.01703
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
+shader = ExtResource("10_4c57u")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.26, 0.18668, 0.1378, 1)
@@ -175,11 +180,32 @@ alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/GameOverScreen/VBoxContainer" unique_id=5762809]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.8784314, 0.9372549, 1, 1)
+theme_override_font_sizes/font_size = 26
 text = "Rejected"
+
+[node name="NauseaOverlay" type="ColorRect" parent="CanvasLayer/GameOverScreen/VBoxContainer/Label" unique_id=1289085813]
+visible = false
+material = SubResource("ShaderMaterial_efxa6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Button" type="Button" parent="CanvasLayer/GameOverScreen/VBoxContainer" unique_id=1914047187]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.81960785, 0.7372549, 0.57254905, 1)
+theme_override_font_sizes/font_size = 24
 text = "Just Press me to start again."
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/GameOverScreen/VBoxContainer" unique_id=1428489589]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(0.81960785, 0.7372549, 0.57254905, 1)
+theme_override_font_sizes/font_size = 24
+text = "Main Menu"
 
 [node name="CatchUpBar" type="ProgressBar" parent="CanvasLayer" unique_id=12350256]
 anchors_preset = -1
@@ -343,6 +369,24 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
 text = "Damage"
 
+[node name="NauseaOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1866123961]
+visible = false
+material = SubResource("ShaderMaterial_efxa6")
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.5
+offset_top = -55.5
+offset_right = 1366.0
+offset_bottom = 698.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=1488771905]
 script = ExtResource("5_lquwl")
 enemy_scene = ExtResource("1_0xm2m")
+
+[node name="foodspawner" type="Timer" parent="." unique_id=565899967]
+wait_time = 7.0
+autostart = true
+script = ExtResource("11_efxa6")

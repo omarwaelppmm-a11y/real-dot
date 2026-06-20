@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://mek6tce4jimh"]
+
+[ext_resource type="Script" uid="uid://bo8tdf0dvxbqg" path="res://food.gd" id="1_8txok"]
+[ext_resource type="Texture2D" uid="uid://bfkkxka3g0q2" path="res://Assets/honey_jar_sprite_sheet-removebg-preview.png" id="2_pohk7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6vj8"]
+atlas = ExtResource("2_pohk7")
+region = Rect2(14, 0, 159, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8piq"]
+atlas = ExtResource("2_pohk7")
+region = Rect2(173, 0, 159, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fm71"]
+atlas = ExtResource("2_pohk7")
+region = Rect2(332, 0, 159, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu35j"]
+atlas = ExtResource("2_pohk7")
+region = Rect2(491, 0, 159, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kktf7"]
+atlas = ExtResource("2_pohk7")
+region = Rect2(14, 191, 159, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hojwv"]
+atlas = ExtResource("2_pohk7")
+region = Rect2(173, 191, 159, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yi55"]
+atlas = ExtResource("2_pohk7")
+region = Rect2(332, 191, 159, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_welc0"]
+atlas = ExtResource("2_pohk7")
+region = Rect2(491, 191, 159, 191)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p0hau"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6vj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8piq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fm71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lu35j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kktf7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hojwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yi55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_welc0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3jsdm"]
+radius = 22.090721
+
+[node name="Food" type="Area2D" unique_id=1181598134]
+script = ExtResource("1_8txok")
+heal_amount = 5.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1450829862]
+position = Vector2(11, 10)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_p0hau")
+autoplay = "default"
+frame_progress = 0.469212
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1034562454]
+position = Vector2(10, 10)
+shape = SubResource("CircleShape2D_3jsdm")
+
+[node name="LifespanTimer" type="Timer" parent="." unique_id=1341381037]
+wait_time = 8.0
+one_shot = true
+autostart = true

@@ -79,7 +79,7 @@ func _physics_process(_delta: float) -> void:
 	if is_dashing:
 		velocity = dash_direction * dash_speed
 	else:
-		var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		velocity = direction * speed
 		
 		if Input.is_action_just_pressed("dash") and can_dash and direction != Vector2.ZERO:
@@ -159,3 +159,10 @@ func die() -> void:
 	if is_instance_valid(game_over_screen):
 		game_over_screen.show()
 	get_tree().paused = true
+
+func apply_nausea() -> void:
+	var nausea = get_node_or_null("/root/Main/CanvasLayer/NauseaOverlay")
+	if is_instance_valid(nausea):
+		nausea.show()
+		await get_tree().create_timer(15.0, false).timeout
+		nausea.hide()
